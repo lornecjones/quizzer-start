@@ -93,6 +93,19 @@ export class PlayerComponent {
   }
 
   seekToQuestion(direction:Seek) {
+    // get the current responses only if
+    if (direction !== Seek.Beginning) {
+//      this.answers[this.position.getPosition()] = this.getPlayerResponses(this.responses, this.current.choices);
+    }
+
+    this.position.seek(direction);
+
+    // get the current questions from the quiz
+    this.index = this.position.getPosition();
+    this.current = this.questions.quiz.questions[this.index ];
+    // restore previous answer if one exists
+    this.responses = (this.answers[this.index ]) ? this.answers[this.index ] : [];
+//    this.index = this.position.getPosition();
   }
 
   tabulate() {
