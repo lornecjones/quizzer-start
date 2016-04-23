@@ -374,10 +374,18 @@ export class QuizService implements IQuizService {
 
   // returns all of the quizzes
   getQuizzes() {
+    return quizList;
   }
 
   // returns a specific quiz
   getQuiz(id:number) {
+    for (let quiz of quizList) {
+      if (quiz._id === id) {
+        return quiz;
+      }
+    }
+    // probably need better way to deal with no
+    return null;
   }
 }
 

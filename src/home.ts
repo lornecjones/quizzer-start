@@ -2,9 +2,9 @@ import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
 import {AboutComponent} from './about'
 import {HelloComponent} from './hello'
+import {QuizComponent} from './quiz'
+import {PlayerComponent} from './player'
 // import {LoginComponent} from './login'
-// import {QuizComponent} from './quiz'
-// import {PlayerComponent} from './player'
 
 @RouteConfig([
   {
@@ -16,25 +16,24 @@ import {HelloComponent} from './hello'
     path: '/hello',
     name: 'Hello',
     component: HelloComponent,
+  },
+  {
+    path: '/quiz',
+    name: 'Quiz',
+    component: QuizComponent,
     useAsDefault: true
   },
+  {
+    path: '/player/:id',
+    name: 'Player',
+    component: PlayerComponent
+  }
   //
   // {
   //   path: '/login',
   //   name: 'Login',
   //   component: LoginComponent
   // },
-  // {
-  //   path: '/quiz',
-  //   name: 'Quiz',
-  //   component: QuizComponent,
-  //   useAsDefault: true
-  // },
-  // {
-  //   path: '/player/:id',
-  //   name: 'Player',
-  //   component: PlayerComponent
-  // }
 ])
 
 @Component({
