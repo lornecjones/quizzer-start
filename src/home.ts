@@ -15,7 +15,8 @@ import {HelloComponent} from './hello'
   {
     path: '/hello',
     name: 'Hello',
-    component: HelloComponent
+    component: HelloComponent,
+    useAsDefault: true
   },
   //
   // {
