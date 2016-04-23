@@ -6,17 +6,25 @@ import {Seek} from './Seek'
 // annotations come from TS
 @Component({
   selector: 'player',
-  templateUrl: './templates/player.html'
+  templateUrl: './templates/player.html',
+  providers: [QuizService]
 })
 
 // classes come from es6
 export class PlayerComponent {
+  quiz: IQuizList;
 
-  constructor() {
+  constructor(private _quizService:QuizService) {
   }
 
-  clickHandler(event) {
-    alert('Bingo!');
+  ngOnInit() {
+    this.getQuiz();
   }
+
+  getQuiz() {
+    this.quiz = this._quizService.getQuiz(1);
+    debugger;
+  }
+
 }
 
