@@ -2,7 +2,7 @@ import {Component} from 'angular2/core';
 
 // annotations come from TS
 @Component({
-  selector: 'hola',
+  selector: 'hello',
   templateUrl: './templates/hello.html'
 //   template: `
 // <fieldset>
