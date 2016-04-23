@@ -87,15 +87,29 @@ export class PlayerComponent {
 
     this.position.setMax(data.quiz.questions.length);
     this.position.seek(Seek.Beginning);
-//    this.seekToQuestion(Seek.Beginning);
+    this.seekToQuestion(Seek.Beginning);
 
     console.info(`Received data from service: ${data.quiz.questions.length}`);
   }
 
+
+  getPlayerResponses(response:Array<boolean>, question:IChoice[]):boolean[] {
+    let ndx:number;
+    let newResponses = question.map(() => false);
+
+    for (ndx = 0; ndx < response.length; ndx += 1) {
+      if (response[ndx]) {
+        newResponses[ndx] = true;
+      }
+    }
+    return newResponses;
+  }
+
+
   seekToQuestion(direction:Seek) {
     // get the current responses only if
     if (direction !== Seek.Beginning) {
-//      this.answers[this.position.getPosition()] = this.getPlayerResponses(this.responses, this.current.choices);
+      this.answers[this.position.getPosition()] = this.getPlayerResponses(this.responses, this.current.choices);
     }
 
     this.position.seek(direction);
@@ -109,7 +123,31 @@ export class PlayerComponent {
   }
 
   tabulate() {
+    let outer:number;
+    let right = 0;
 
+    // loop thru all of the responses & compare them to the answers
+    for (outer = 0; outer < this.total; outer += 1) {
+      let inner:number;
+      let correct = false;
+      let question = this.questions.quiz.questions[outer].choices.map((choice:IChoice) => !!choice.isAnswer);
+      let answer = this.answers[outer];
+
+      // were there an answer for the current question?
+      if (answer) {
+        // default to the player answering correctly
+        correct = true;
+        for (inner = 0; inner < answer.length; inner += 1) {
+          if (question[inner] != answer[inner]) {
+            correct = false;
+            break;
+          }
+        }
+      }
+      right += (correct ? 1 : 0);
+      console.info(`question ${outer} = ${(correct ? 'right' : 'wrong')}`);
+    }
+    return right;
   }
 
 
